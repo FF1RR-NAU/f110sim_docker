@@ -1,9 +1,7 @@
-FROM nxtruong/roskineticvnc:latest
+FROM nxtruong/rosmelodicvnc:latest
 MAINTAINER Truong Nghiem <truong.nghiem@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
-
-# RUN sed -i 's#http://archive.ubuntu.com/#http://tw.archive.ubuntu.com/#' /etc/apt/sources.list
 
 # Uncomment to install some utility programs
 # RUN apt-get update \
@@ -18,8 +16,6 @@ ENV DEBIAN_FRONTEND noninteractive
 # RUN cp /usr/bin/vlc /usr/bin/vlc_backup
 # RUN sed -i 's/geteuid/getppid/' /usr/bin/vlc
 
-# setup keys
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 421C365BD9FF1F717815A3895523BAEEB01FA116
 
 ## Install ROS packages for the simulator
 
@@ -28,15 +24,15 @@ ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
 # Install dependencies for the F1/10 Tutorials
-RUN apt-get update && apt-get install --no-install-recommends -y --allow-unauthenticated\
-    python-rosinstall-generator \
-    ros-kinetic-ros-control \
-    # ros-kinetic-gazebo-ros-control \
-    ros-kinetic-ros-controllers \
-    ros-kinetic-navigation qt4-default \
-    ros-kinetic-ackermann-msgs \
-    ros-kinetic-serial \
-    ros-kinetic-joy \
+RUN apt-get update && apt-get install --no-install-recommends -y --allow-unauthenticated \
+    ros-melodic-ros-control \
+    # ros-melodic-gazebo-ros-control \
+    ros-melodic-ros-controllers \
+    ros-melodic-navigation \
+    ros-melodic-ackermann-msgs \
+    ros-melodic-serial \
+    ros-melodic-joy \
+	ros-melodic-map-server \
     libeigen3-dev \
 	&& apt-get autoclean \
     && apt-get autoremove \
@@ -51,7 +47,7 @@ RUN /bin/bash -c 'cp -r /usr/include/eigen3/Eigen /usr/include'
 # Clone and build the Racecar simulator
 RUN mkdir -p /home/catkin_ws/src/f110_ros
 RUN git clone https://github.com/f1tenth/f110_ros /home/catkin_ws/src/f110_ros
-RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/catkin_ws; catkin_make'
+RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; cd /home/catkin_ws; catkin_make'
 
 EXPOSE 80
 WORKDIR /home/

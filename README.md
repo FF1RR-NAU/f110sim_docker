@@ -1,10 +1,14 @@
-# Docker image for F1/10 simulator on ROS Kinetic with VNC
+# Docker image for F1/10 simulator on ROS with VNC
 
-Based on:  <https://github.com/mlab-upenn/f110_docker> and use <https://github.com/FF1RR-NAU/roskineticvnc>.
+Based on:  <https://github.com/mlab-upenn/f110_docker> and use one of the ROS images at <https://github.com/FF1RR-NAU>.
 
 ## Quick start
 ```
 docker run -it -p 6080:80 nxtruong/f110sim
+```
+or if you want to select the version of ROS:
+```
+docker run -it -p 6080:80 nxtruong/f110sim:[ROS version tag: kinetic/melodic]
 ```
 Then open your browser and go to http://127.0.0.1:6080/.
 After you've connected to the Ubuntu in Docker, click the button at the bottom left of the screen, go to System Tools --> LXTerminal.
