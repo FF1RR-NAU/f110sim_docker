@@ -45,8 +45,8 @@ RUN rosdep update
 RUN /bin/bash -c 'cp -r /usr/include/eigen3/Eigen /usr/include'
 
 # Clone and build the Racecar simulator
-RUN mkdir -p /home/catkin_ws/src/f110_ros
-RUN git clone https://github.com/f1tenth/f110_ros /home/catkin_ws/src/f110_ros
+RUN mkdir -p /home/catkin_ws/src/f110_simulator
+RUN git clone https://github.com/FF1RR-NAU/f110_simulator.git /home/catkin_ws/src/f110_simulator
 RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; cd /home/catkin_ws; catkin_make'
 
 EXPOSE 80
